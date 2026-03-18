@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Beauty – Products</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/products.css">
+</head>
+<body>
+
+<header class="flipkart-header">
+    <div class="header-container">
+
+        <div class="logo-section">
+            <a href="home.html">
+                <img src="../images/logo.png" class="logo-img" alt="logo">
+            </a>
+        </div>
+
+        <div class="nav-search">
+            <input type="text" id="searchInput" placeholder="Search beauty products...">
+        </div>
+
+        <div class="nav-actions">
+
+            <a href="home.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+
+            <a href="login.html" class="nav-item" id="loginBtn">
+                <i class="fa-regular fa-user"></i>
+                <span>Login</span>
+            </a>
+
+            <a href="profile.html" class="nav-item" id="userDisplay" style="display:none;">
+                <i class="fa-regular fa-user"></i>
+                <span>My Profile</span>
+            </a>
+
+            <a href="#" class="nav-item" id="logoutBtn" style="display:none;">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+            <a href="cart.html" class="nav-item">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Cart</span>
+            </a>
+
+        </div>
+    </div>
+</header>
+
+<section class="products-page">
+    <div class="products-container">
+
+        <aside class="filters">
+            <h3>Filters</h3>
+            <div class="filter-block">
+                <h4>Category</h4>
+                <label><input type="checkbox"> Skincare</label>
+                <label><input type="checkbox"> Makeup</label>
+                <label><input type="checkbox"> Haircare</label>
+            </div>
+            <div class="filter-block">
+                <h4>Brand</h4>
+                <label><input type="checkbox"> Lakme</label>
+                <label><input type="checkbox"> Maybelline</label>
+                <label><input type="checkbox"> Plum</label>
+                <label><input type="checkbox"> WOW</label>
+            </div>
+            <div class="filter-block">
+                <h4>Price</h4>
+                <label><input type="checkbox"> Under ₹1,000</label>
+                <label><input type="checkbox"> ₹1,000 – ₹3,000</label>
+                <label><input type="checkbox"> Above ₹3,000</label>
+            </div>
+        </aside>
+
+        <main class="products-grid">
+            <div class="product-card">
+                <a href="product.html?id=vitcserum" class="product-link">
+                    <img src="../images/products/vitc1.png" alt="Face Serum">
+                    <h4>Vitamin C Face Serum</h4>
+                    <p class="price">₹899</p>
+                    <button>Add to Cart</button>
+                </a>
+            </div>
+            <div class="product-card">
+                <a href="product.html?id=lipstick" class="product-link">
+                    <img src="../images/products/lipstick1.png" alt="Lipstick">
+                    <h4>Matte Lipstick</h4>
+                    <p class="price">₹599</p>
+                    <button>Add to Cart</button>
+                </a>
+            </div>
+        </main>
+
+    </div>
+</section>
+
+<script src="../js/beauty.js"></script>
+<script src="../js/navbar.js"></script>
+</body>
+</html>

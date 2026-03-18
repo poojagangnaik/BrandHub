@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fashion – Products</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/products.css">
+</head>
+<body>
+
+<header class="flipkart-header">
+    <div class="header-container">
+
+        <div class="logo-section">
+            <a href="home.html">
+                <img src="../images/logo.png" class="logo-img" alt="logo">
+            </a>
+        </div>
+
+        <div class="nav-search">
+            <input type="text" id="searchInput" placeholder="Search fashion...">
+        </div>
+
+        <div class="nav-actions">
+
+            <a href="home.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+
+            <a href="login.html" class="nav-item" id="loginBtn">
+                <i class="fa-regular fa-user"></i>
+                <span>Login</span>
+            </a>
+
+            <a href="profile.html" class="nav-item" id="userDisplay" style="display:none;">
+                <i class="fa-regular fa-user"></i>
+                <span>My Profile</span>
+            </a>
+
+            <a href="#" class="nav-item" id="logoutBtn" style="display:none;">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+            <a href="cart.html" class="nav-item">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Cart</span>
+            </a>
+
+        </div>
+    </div>
+</header>
+
+<section class="products-page">
+    <div class="products-container">
+
+        <aside class="filters">
+            <h3>Filters</h3>
+            <div class="filter-block">
+                <h4>Category</h4>
+                <label><input type="checkbox"> Shoes</label>
+                <label><input type="checkbox"> Jeans</label>
+            </div>
+            <div class="filter-block">
+                <h4>Gender</h4>
+                <label><input type="checkbox"> Men</label>
+                <label><input type="checkbox"> Women</label>
+            </div>
+            <div class="filter-block">
+                <h4>Price</h4>
+                <label><input type="checkbox"> Under ₹2,000</label>
+                <label><input type="checkbox"> ₹2,000 – ₹5,000</label>
+                <label><input type="checkbox"> Above ₹5,000</label>
+            </div>
+            <div class="filter-block">
+                <h4>Size</h4>
+                <label><input type="checkbox"> S</label>
+                <label><input type="checkbox"> M</label>
+                <label><input type="checkbox"> L</label>
+                <label><input type="checkbox"> XL</label>
+            </div>
+        </aside>
+
+        <main class="products-grid">
+            <div class="product-card">
+                <a href="product.html?id=nikeshoes" class="product-link">
+                    <img src="../images/products/nike1.png" alt="Shoes">
+                    <h4>Nike Shoes</h4>
+                    <p class="price">₹1,999</p>
+                    <button>Add to Cart</button>
+                </a>
+            </div>
+            <div class="product-card">
+                <a href="product.html?id=kurti" class="product-link">
+                    <img src="../images/products/kurti1.png" alt="Kurti">
+                    <h4>Chikankari Kurti</h4>
+                    <p class="price">₹699</p>
+                    <button>Add to Cart</button>
+                </a>
+            </div>
+        </main>
+
+    </div>
+</section>
+
+<script src="../js/fashion.js"></script>
+<script src="../js/navbar.js"></script>
+</body>
+</html>

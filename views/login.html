@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – E-Commerce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #f1f3f6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ════════════════════════════
+           NAVBAR  — exact homepage copy
+        ════════════════════════════ */
+        .flipkart-header {
+            background: #448ed8;
+            border-bottom: 1px solid #d6e4ff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            width: 100%;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            padding: 0 32px;
+            gap: 20px;
+        }
+
+        .logo-section { min-width: 137px; }
+
+        .logo-img {
+            height: 100px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-item {
+            color: #eff1f6;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
+        }
+        .nav-item i { font-size: 14px; }
+        .nav-item:hover {
+            background: rgba(40,116,240,.1);
+            color: #070d16;
+        }
+
+        /* ════════════════════════════
+           PAGE BODY
+        ════════════════════════════ */
+        .auth-layout {
+            flex: 1;
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            padding: 40px 16px;
+        }
+
+        /* ── Blue promo panel ── */
+        .auth-promo {
+            background: #2874f0;
+            color: #fff;
+            width: 300px;
+            border-radius: 4px 0 0 4px;
+            padding: 48px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .auth-promo h2 {
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 1.35;
+            margin-bottom: 12px;
+        }
+        .auth-promo p { font-size: 14px; opacity: .85; line-height: 1.7; }
+        .promo-icon { margin-top: 40px; text-align: center; }
+        .promo-icon i { font-size: 90px; opacity: .18; }
+
+        /* ── Sliding card ── */
+        .card-wrapper {
+            width: 380px;
+            background: #fff;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,.12);
+            overflow: hidden;
+        }
+
+        .panels-track {
+            display: flex;
+            width: 200%;
+            transition: transform .45s cubic-bezier(.4,0,.2,1);
+        }
+        .panels-track.show-signup { transform: translateX(-50%); }
+
+        .auth-panel {
+            width: 50%;
+            padding: 36px 36px 28px;
+            flex-shrink: 0;
+        }
+
+        /* ── Panel heading ── */
+        .panel-heading { margin-bottom: 26px; }
+        .panel-heading h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #212121;
+            margin-bottom: 4px;
+        }
+        .panel-heading p { font-size: 13px; color: #888; }
+
+        /* ── Form ── */
+        .form-group { margin-bottom: 18px; }
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #666;
+            margin-bottom: 6px;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+        }
+
+        .input-wrap { position: relative; }
+        .input-wrap .icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ccc;
+            font-size: 14px;
+            pointer-events: none;
+            transition: color .2s;
+        }
+        .input-wrap input:focus ~ .icon { color: #2874f0; }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 11px 36px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #212121;
+            background: #fafafa;
+            outline: none;
+            transition: border-color .2s, box-shadow .2s;
+        }
+        input:focus {
+            border-color: #2874f0;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(40,116,240,.08);
+        }
+
+        .eye-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #bbb;
+            font-size: 14px;
+            padding: 4px;
+        }
+        .eye-btn:hover { color: #555; }
+
+        /* ── Saved account chips ── */
+        .history-section { margin-bottom: 16px; }
+        .history-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #aaa;
+            letter-spacing: .4px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .history-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #e8f0fe;
+            color: #2874f0;
+            border: 1px solid #c5d8f8;
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background .15s;
+        }
+        .chip:hover { background: #d2e3fc; }
+        .chip-x {
+            background: none;
+            border: none;
+            color: #aaa;
+            cursor: pointer;
+            font-size: 11px;
+            padding: 0;
+            margin-left: 2px;
+        }
+        .chip-x:hover { color: #d32f2f; }
+
+        /* ── Alerts ── */
+        .alert {
+            display: none;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 4px;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+        .alert.show { display: flex; }
+        .alert-error   { background: #fdecea; color: #c62828; border-left: 3px solid #d32f2f; }
+        .alert-success { background: #e8f5e9; color: #2e7d32; border-left: 3px solid #388e3c; }
+        .alert i { font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+
+        /* ── Buttons ── */
+        .btn-primary {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: .3px;
+            transition: background .2s, transform .1s;
+            margin-top: 4px;
+        }
+        .btn-primary:active { transform: scale(.99); }
+        .btn-orange { background: #fb641b; color: #fff; }
+        .btn-orange:hover { background: #e55a15; }
+        .btn-blue   { background: #2874f0; color: #fff; }
+        .btn-blue:hover { background: #1a5cc8; }
+
+        /* ── Switch link ── */
+        .switch-link {
+            text-align: center;
+            font-size: 13px;
+            color: #777;
+            margin-top: 20px;
+        }
+        .switch-link button {
+            background: none;
+            border: none;
+            color: #2874f0;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 13px;
+            padding: 0;
+        }
+        .switch-link button:hover { text-decoration: underline; }
+
+        /* ── Responsive ── */
+        @media (max-width: 720px) {
+            .auth-promo { display: none; }
+            .card-wrapper { border-radius: 4px; width: min(100%, 400px); }
+        }
+        @media (max-width: 440px) {
+            .auth-panel { padding: 28px 20px 22px; }
+            .auth-layout { padding: 16px 12px; align-items: flex-start; padding-top: 24px; }
+        }
+        @media (max-width: 768px) {
+            .nav-actions { gap: 12px; }
+            .nav-item { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVBAR (exact homepage) ═══════════════ -->
+<header class="flipkart-header">
+    <div class="header-container">
+
+        <!-- LOGO -->
+        <div class="logo-section">
+            <a href="../views/home.html">
+                <img src="../images/logo.png" class="logo-img" alt="logo">
+            </a>
+        </div>
+
+        <!-- NAV ACTIONS -->
+        <div class="nav-actions">
+
+            <!-- Shown when logged in -->
+            <a href="../views/profile.html" class="nav-item" id="userDisplay" style="display:none;">
+                <i class="fa-regular fa-user"></i>
+                <span>My Profile</span>
+            </a>
+
+            <a href="#" class="nav-item" id="logoutBtn" style="display:none;">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+            <a href="../views/orders.html" class="nav-item">
+                <i class="fa-solid fa-box"></i>
+                <span>Orders</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <i class="fa-regular fa-bell"></i>
+                <span>Notifications</span>
+            </a>
+
+            <a href="../views/cart.html" class="nav-item">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Cart</span>
+            </a>
+
+        </div>
+    </div>
+</header>
+
+<!-- ═══════════════ AUTH LAYOUT ═══════════════ -->
+<div class="auth-layout">
+
+    <!-- Blue promo side -->
+    <div class="auth-promo">
+        <div>
+            <h2>Login &amp; Explore Thousands of Products</h2>
+            <p>Access your Orders, Wishlist and Recommendations. New here? Create an account in seconds.</p>
+        </div>
+        <div class="promo-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+    </div>
+
+    <!-- Sliding card -->
+    <div class="card-wrapper">
+        <div class="panels-track" id="panelsTrack">
+
+            <!-- ══ LOGIN PANEL ══ -->
+            <div class="auth-panel">
+                <div class="panel-heading">
+                    <h2>Login</h2>
+                    <p>Welcome back! Please enter your credentials.</p>
+                </div>
+
+                <div class="alert alert-error" id="login-error">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span>Invalid credentials.</span>
+                </div>
+                <div class="alert alert-success" id="login-success">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Login successful! Redirecting…</span>
+                </div>
+
+                <div class="history-section" id="login-hist-section" style="display:none;">
+                    <div class="history-label">Saved accounts</div>
+                    <div class="history-chips" id="login-hist-chips"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Username</label>
+                    <div class="input-wrap">
+                        <input type="text" id="login-user" placeholder="Enter your username" autocomplete="username">
+                        <i class="fa-regular fa-user icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrap">
+                        <input type="password" id="login-pass" placeholder="Enter your password" autocomplete="current-password">
+                        <i class="fa-solid fa-lock icon"></i>
+                        <button type="button" class="eye-btn" onclick="toggleEye('login-pass',this)">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="btn-primary btn-orange" onclick="handleLogin()">Login</button>
+
+                <div class="switch-link">
+                    New here? <button onclick="showSignup()">Create account</button>
+                </div>
+            </div>
+
+            <!-- ══ SIGNUP PANEL ══ -->
+            <div class="auth-panel">
+                <div class="panel-heading">
+                    <h2>Create Account</h2>
+                    <p>Join us — it only takes a moment.</p>
+                </div>
+
+                <div class="alert alert-error" id="signup-error">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span>Please fill all fields.</span>
+                </div>
+                <div class="alert alert-success" id="signup-success">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Account created! Taking you to login…</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Username</label>
+                    <div class="input-wrap">
+                        <input type="text" id="signup-user" placeholder="Choose a username" autocomplete="username">
+                        <i class="fa-regular fa-user icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Create Password</label>
+                    <div class="input-wrap">
+                        <input type="password" id="signup-pass" placeholder="Create a password" autocomplete="new-password">
+                        <i class="fa-solid fa-lock icon"></i>
+                        <button type="button" class="eye-btn" onclick="toggleEye('signup-pass',this)">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <div class="input-wrap">
+                        <input type="password" id="signup-confirm" placeholder="Re-enter your password" autocomplete="new-password">
+                        <i class="fa-solid fa-lock icon"></i>
+                        <button type="button" class="eye-btn" onclick="toggleEye('signup-confirm',this)">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="btn-primary btn-blue" onclick="handleSignup()">Create Account</button>
+
+                <div class="switch-link">
+                    Already have an account? <button onclick="showLogin()">Login</button>
+                </div>
+            </div>
+
+        </div><!-- /panels-track -->
+    </div><!-- /card-wrapper -->
+
+</div><!-- /auth-layout -->
+
+<script src="../js/login.js"></script>
+</body>
+</html>
